@@ -7,8 +7,8 @@ class Calculadora:
         self.dolar_oficial = dolar_oficial
 
     def calcular(self,dolar_billete):
-        pesos_oficial = dolar_billete * self.dolar_oficial.precio
+        pesos_oficial = dolar_billete * self.dolar_oficial.price
         print('cantidad de dolar blue: ')
-        print(float(pesos_oficial)/self.dolar_blue.precio)
+        print(float(pesos_oficial)/self.dolar_blue.price)
 
         

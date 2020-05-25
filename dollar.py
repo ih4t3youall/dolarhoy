@@ -1,8 +1,11 @@
+from datetime import date
 class Dollar:
-    def __init__(self,nombre,precio):
-       self.precio = float(precio.replace(',','.'))
-       self.nombre = nombre
+    def __init__(self,name,price,date):
+       self.price = float(price.replace(',','.'))
+       self.name = name
+       self.date = date
 
     def imprimir_dolar(self):
-        print(self.nombre)
-        print(self.precio)
+        print(self.name)
+        print(self.price)
+        print(self.date)
