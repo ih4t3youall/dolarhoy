@@ -9,3 +9,6 @@ class Dollar:
         print(self.name)
         print(self.price)
         print(self.date)
+    def pretty_print(self):
+        print(self.name)
+        print(self.price)

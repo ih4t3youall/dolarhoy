@@ -20,6 +20,7 @@ class Save_dollar:
     def append_dollar(self,dollar):
         file = open(self.path,mode='a+b')
         pickle.dump(dollar,file)
+
     def read_all(self):
         file = open(self.path,'rb')
         listaDollar =[]
