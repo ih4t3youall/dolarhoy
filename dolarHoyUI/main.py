@@ -15,8 +15,11 @@ class Aplicacion():
     def __init__(self):
         self.dollar_saver = Save_dollar()
         dollars= get_dollars()
-        self.calculadora = Calculadora(dollars['blue'],dollars['oficial'])
+        self.dolar_blue =dollars['blue']
+        self.dolar_oficial = dollars['oficial']
+        self.calculadora = Calculadora(self.dolar_blue,self.dolar_oficial)
         
+
         self.raiz = Tk()
         self.raiz.geometry('600x400')
 
@@ -98,6 +101,7 @@ class Aplicacion():
     def calc_dollar(self):
         dolar_billete = self.ctext1.get()
         final = self.calculadora.calcular(float(dolar_billete))
+        final = 'Pagas en blue \n'+str(final)
         self.fill_textbox(final)
     def dol_historic(self):
         lista_dollar = self.dollar_saver.read_all()
@@ -106,11 +110,37 @@ class Aplicacion():
             text+=dollar.name + ': '+ str(dollar.price)+', fecha: '+ str(dollar.date)
         self.fill_textbox(text)
     def save_dollar(self):
-        save_dollar = 'salvando el dolar'
-        self.fill_textbox(save_dollar)
+        self.dollar_now()
+        allhistoric = self.dollar_saver.read_all()
+        try:
+            last_dollar_saved= allhistoric[len(allhistoric)-1]
+            if last_dollar_saved is not None:
+                if self.dolar_blue.date > last_dollar_saved.date:
+                    dolar_saver.append_dollar(self.dolar_blue)
+                    self.fill_textbox('new dollar saved')
+                else:
+                    #equals or less
+                    if last_dollar_saved.price != self.dolar_blue.price:
+                        print('sobre escribo el ultimo registro')
+                        self.fill_textbox('sobre escribo el ultimo registro')
+                        dolar_saver.update_last_one(self.dolar_blue)
+                    else:
+                        print('same price not update')
+                        self.fill_textbox('same price not update')
+            else:
+                self.dollar_saver.append_dollar(self.dolar_blue)
+        except Exception:
+           # traceback.print_exc(file=sys.stdout) 
+            print('exception')
+            self.fill_textbox('exception no prior values, creating the first one')
+            self.dollar_saver.save_dollar(self.dolar_blue)
+
     def dollar_now(self):
         dollars = get_dollars()
-        text=dollars['blue'].name+': '+str(dollars['blue'].price)+'\n'
+        self.dolar_blue = dollars['blue']
+        self.dolar_oficial = dollars['oficial']
+        text='dolar now:\n'
+        text=text+dollars['blue'].name+': '+str(dollars['blue'].price)+'\n'
         text=text+dollars['oficial'].name+': '+str(dollars['oficial'].price)
         self.fill_textbox(text)
         
