@@ -113,14 +113,11 @@ class Aplicacion():
         lista_dollar = self.dollar_saver.read_all()
         text=''
         for dollar in lista_dollar:
-            print('i was here too')
             text+=dollar.name + ': '+ str(dollar.price)+', fecha: '+ str(dollar.date)
             text+='\n'
         self.fill_textbox(text)
     def save_dollar(self):
         self.dollar_now()
-        aDate = datetime.date(2020, 6, 30)
-        self.dolar_blue = Dollar('dolar blue prueba','130.0',aDate)
         allhistoric = self.dollar_saver.read_all()
         try:
             last_dollar_saved= allhistoric[len(allhistoric)-1]
@@ -154,7 +151,6 @@ class Aplicacion():
         text=text+dollars['oficial'].name+': '+str(dollars['oficial'].price)
         self.fill_textbox(text)
     def create_test(self):
-        print('i was here')
         aDate = datetime.date(2019, 6, 15)
         dolar1 = Dollar('dolar a','120.0',aDate)
         aDate2 = datetime.date(2019, 6, 16)
