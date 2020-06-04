@@ -115,7 +115,7 @@ class Aplicacion():
     def convert_dollar(self):
         toConvert = float(self.convertDolar.get())
         toConvert =(self.dolar_oficial.price * float(1.3))*toConvert
-        print(toConvert)
+        self.fill_textbox("Son pesos: "+toConvert)
 
     def calc_dollar(self):
         dolar_billete = self.ctext1.get()
