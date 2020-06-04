@@ -36,6 +36,9 @@ class Aplicacion():
         self.ctext1 = ttk.Entry(self.raiz,
                                 textvariable=self.cantidad,
                                 width=10)
+        self.dolarToConvert= StringVar()
+        self.convertDolar = ttk.Entry(self.raiz,
+                                    textvariable=self.dolarToConvert)
         
         # Impide que los bordes puedan desplazarse para
         # ampliar o reducir el tamaño de la ventana 'self.raiz':
@@ -56,6 +59,11 @@ class Aplicacion():
                         padx=5, pady=5)
         self.boton_cal_dollar = ttk.Button(self.raiz,text='calc Dollar',command=self.calc_dollar)
         self.boton_cal_dollar.pack(side=TOP)
+
+        self.convertDolar.pack(side=TOP, fill=X, expand=False,
+                        padx=5, pady=5)
+        self.convert_dollar_button = ttk.Button(self.raiz,text='convertir',command=self.convert_dollar)
+        self.convert_dollar_button.pack(side=TOP)
         
         # Define el widget Button 'self.binfo' que llamará 
         # al metodo 'self.verinfo' cuando sea presionado
@@ -75,8 +83,8 @@ class Aplicacion():
         self.save_today_dollar = ttk.Button(self.raiz,text='Dollar now',command=self.dollar_now)
         self.save_today_dollar.pack(side=LEFT)
         #test
-        self.save_today_dollar = ttk.Button(self.raiz,text='test',command=self.create_test)
-        self.save_today_dollar.pack(side=LEFT)
+        #self.save_today_dollar = ttk.Button(self.raiz,text='test',command=self.create_test)
+        #self.save_today_dollar.pack(side=LEFT)
         
         # Define el botón 'self.bsalir'. En este caso
         # cuando sea presionado, el método destruirá o
@@ -103,6 +111,11 @@ class Aplicacion():
     def fill_textbox(self,data):
         self.tinfo.delete(1.0,END)
         self.tinfo.insert(1.0, str(data))
+
+    def convert_dollar(self):
+        toConvert = float(self.convertDolar.get())
+        toConvert =(self.dolar_oficial.price * float(1.3))*toConvert
+        print(toConvert)
 
     def calc_dollar(self):
         dolar_billete = self.ctext1.get()
