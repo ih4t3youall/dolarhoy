@@ -1,5 +1,6 @@
 from dollar import Dollar
 
+
 class Calculadora:
 
     def __init__(self,dolar_blue:Dollar,dolar_oficial:Dollar):
